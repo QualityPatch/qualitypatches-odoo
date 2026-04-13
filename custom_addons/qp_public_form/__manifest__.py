@@ -1,7 +1,7 @@
 {
     "name": "QP Public Form",
     "version": "1.0",
-    "summary": "Public website form for Patch Records",
+    "summary": "Public website form for Patch Entry page",
     "category": "Website",
     "depends": ["website"],
     "data": [
