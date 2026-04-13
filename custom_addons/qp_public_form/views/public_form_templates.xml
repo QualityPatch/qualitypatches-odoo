@@ -1,47 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="qp_public_form_page" name="QP Public Form Page">
-        <t t-call="website.layout">
-            <div class="container my-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <h1 class="mb-4 text-center">Quality Patch Order Tracking Form</h1>
+    <template id="qp_public_form_assets" inherit_id="website.assets_frontend" name="QP Public Form Assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function () {
+                    const container = document.getElementById("qp-custom-form-container");
+                    if (!container) {
+                        return;
+                    }
 
-                        <form action="/qp/public-form/submit" method="post" class="oe_website_form">
-                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    container.innerHTML = `
+                        <form action="/qp/public-form/submit" method="post" class="container my-5">
+                            <input type="hidden" name="csrf_token" value="${odoo.csrf_token}"/>
 
                             <div class="mb-3">
-                                <label class="form-label">Order No</label>
-                                <input type="text" name="order_no" class="form-control" required="required"/>
+                                <label>Order No</label>
+                                <input type="text" name="order_no" class="form-control" required />
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Good Pcs</label>
-                                <input type="number" name="good_pcs" class="form-control" required="required"/>
+                                <label>Shift Incharge</label>
+                                <input type="text" name="shift_incharge" class="form-control" required />
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Rejected Pcs</label>
-                                <input type="number" name="rejected_pcs" class="form-control" required="required"/>
+                                <label>Machine No</label>
+                                <input type="number" name="machine_no" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Good Pcs</label>
+                                <input type="number" name="good_pcs" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Rejected Pcs</label>
+                                <input type="number" name="rejected_pcs" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>No Of Cones</label>
+                                <input type="number" name="no_of_cones" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Fabric Length</label>
+                                <input type="text" name="fabric_length" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Store In Time</label>
+                                <input type="datetime-local" name="store_in_time" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Store Out Time</label>
+                                <input type="datetime-local" name="store_out_time" class="form-control" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Machine Setup Time</label>
+                                <input type="text" name="machine_setup_time" class="form-control" />
+                            </div>
+
+                            <div class="mb-4">
+                                <label>Edit Time</label>
+                                <input type="text" name="edit_time" class="form-control" />
                             </div>
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary px-5">Submit</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </t>
-    </template>
-
-    <template id="qp_public_form_thank_you" name="QP Public Form Thank You">
-        <t t-call="website.layout">
-            <div class="container my-5 text-center">
-                <h2>Thank You</h2>
-                <p>Your record has been submitted successfully.</p>
-                <a href="/qp/public-form" class="btn btn-primary">Submit Another Record</a>
-            </div>
-        </t>
+                    `;
+                });
+            </script>
+        </xpath>
     </template>
 </odoo>
